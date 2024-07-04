@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH --job-name=kraken2
+#SBATCH -n 16
+#SBATCH -N 1
+#SBATCH -t 48:00:00
+#SBATCH --qos medium
+#SBATCH --mem=75G
+#SBATCH -o kraken_B1.log
+
+/home/jvalero/progamas/kraken2/kraken2 --paired --report reportB2.txt  --db /home/jvalero/progamas/kraken2/Database/kraken-Sdb /home/jvalero/Metagenomics/metagenomesQC/B2-SM174C_fastptrim_1.fastq.gz /home/jvalero/Metagenomics/metagenomesQC/B2-SM174C_fastptrim_2.fastq.gz 
