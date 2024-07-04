@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH --job-name=bbmap
+#SBATCH -n 16
+#SBATCH -N 1
+#SBATCH -t 48:00:00
+#SBATCH --qos medium
+#SBATCH --mem=10G
+#SBATCH -o bbmap_cuatro.log
+
+# Se carga el modulo bbmap (last version))
+module load bbmap
+module load samtools
+
+# Comando para obtener fichero bam
+bbmap.sh in=/home/jvalero/Metagenomics/metagenomesQC/B2-SM174C_fastptrim_1.fastq.gz in2=/home/jvalero/Metagenomics/metagenomesQC/B2-SM174C_fastptrim_2.fastq.gz ref=/home/jvalero/Metagenomics/B2/cuatro/spadesB2/contigs.fasta out=/home/jvalero/Metagenomics/B2/cuatro/bbmapB2/sample2.bam 
+
+# Comando para ordenar el fichero bam
+samtools sort bbmapB2/sample2.bam  -o bbmapB2/sample2_sorted.bam
