@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --job-name=metaspades
+#SBATCH -n 16
+#SBATCH -N 1
+#SBATCH -t 48:00:00
+#SBATCH --qos medium
+#SBATCH --mem=80G
+#SBATCH -o metaspades_B2.log
+
+# Se carga el modulo spades (versión 3.15.5)
+module load spades
+
+# Se realiza el assembly de la muestra
+metaspades.py -1 /home/jvalero/Metagenomics/metagenomesQC/B2-SM174C_fastptrim_1.fastq.gz -2 /home/jvalero/Metagenomics/metagenomesQC/B2-SM174C_fastptrim_2.fastq.gz -k 21,33,55,77 -o spadesB2/
