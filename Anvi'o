@@ -1,0 +1,22 @@
+1. Obtener la base de datos de los contigs del metagenoma
+anvi-gen-contigs-database -f ../Tannery.fa -o tannery.db
+
+2. OPCIONAL: Si la cabecera del contig es muy largo, el paso anterior dará error y tendrás que modificarla
+anvi-script-reformat-fasta ../Tannery.fa -o Tannery_s.fa --simplify-names
+
+3. Anotar los contigs del metagenoma
+anvi-run-hmms -c tannery.db --num-threads 4
+anvi-run-ncbi-cogs -c tannery.db --num-threads 4
+anvi-run-kegg-kofams -c tannery.db --num-threads 4
+
+4. Hacer el profile del metagenome (si no se dispone de fichero de cobertura, utilizar blank-profile)
+anvi-profile -c tannery.db --blank-profile --sample-name tannery  -o tannery_profile
+
+5. OPCIONAL: Consultar el profile del metagenoma (no se puede hacer desde garnatxa)
+anvi-interactive -c tannery.db
+
+5. Estimar el metabolismo del metagenoma
+anvi-estimate-metabolism -c tannery.db
+
+6. Consultar fichero generado
+cat metabolism_modules.txt
