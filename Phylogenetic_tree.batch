@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --job-name=gtdbtk
+#SBATCH -n 1
+#SBATCH -N 1
+#SBATCH -t 48:00:00
+#SBATCH --qos medium
+#SBATCH --mem=50G
+#SBATCH -o denovotree.log
+
+# Se carga el conda environment
+module load anaconda
+conda activate gtdbtk-2.2.6
+
+gtdbtk de_novo_wf --genome_dir MAGs --out_dir tree_complete -x fa --bacteria --outgroup_taxon p__Chloroflexota --skip_gtdb_refs --custom_taxonomy_file complete_tanoxomy_file
