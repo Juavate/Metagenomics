@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name=metabat2
+#SBATCH -n 16
+#SBATCH -N 2
+#SBATCH -t 48:00:00
+#SBATCH --qos medium
+#SBATCH --mem=8G
+#SBATCH -o metabat2_.log
+
+# Se carga el conda environment
+module load anaconda
+conda activate chromium
+
+# Comando para ejecutar metabat2
+runMetaBat.sh spadesB2/contigs.fasta bbmapB2/sample2_sorted.bam
