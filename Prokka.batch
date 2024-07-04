@@ -1,0 +1,24 @@
+#!/bin/bash
+#SBATCH --job-name=prokka
+#SBATCH -n 16
+#SBATCH -N 1
+#SBATCH -t 48:00:00
+#SBATCH --qos medium
+#SBATCH --mem=5G
+#SBATCH -o prokka.log
+
+# Se carga el conda environment
+module load anaconda
+conda activate prokka
+
+# Script para ejecutar prokka con todos los fasta de la carpeta
+for fasta_file in *.fa; do
+	# Se extrae el nombre base del archivo (sin extensión .fa)
+	base_name=$(basename "$fasta_file" .fa)
+
+	# Se crea un nombre para el directorio de salida con el sufijo "_prokka"
+	output_folder="${base_name}_prokka"
+
+	# Se ejecuta prokka para cada fichero fasta
+	prokka --outdir "$output_folder" --prefix "$base_name" "$fasta_file"
+done

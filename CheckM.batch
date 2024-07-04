@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name=checkm
+#SBATCH -n 16
+#SBATCH -N 1
+#SBATCH -t 48:00:00
+#SBATCH --qos medium
+#SBATCH --mem=40G
+#SBATCH -o checkm_cuatro.log
+
+# Se carga el conda environment
+module load anaconda
+conda activate chromium1
+
+#Comando
+checkm lineage_wf -x fa /home/jvalero/Metagenomics/B2/cuatro/bins /home/jvalero/Metagenomics/B2/cuatro/checkm_cuatro

@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name=gtdbtk
+#SBATCH -n 16
+#SBATCH -N 1
+#SBATCH -t 48:00:00
+#SBATCH --qos medium
+#SBATCH --mem=55G
+#SBATCH -o gtd_B1.log
+
+# Se carga el conda environment
+module load anaconda
+conda activate gtdbtk-2.2.6
+
+#Comando
+gtdbtk classify_wf --genome_dir MAGs -x fa --out_dir gtdbtk_output/ --skip_ani_screen
